@@ -15,7 +15,6 @@ A modern React-based dashboard application for visualizing movie statistics and 
 ## Tech Stack
 
 - React with TypeScript
-- GraphQL with Apollo Client
 - Chart.js for data visualization
 - TailwindCSS for styling
 - Vite as build tool
@@ -100,16 +99,16 @@ src/
 ## Dependencies
 
 Main dependencies include:
-- @apollo/server: ^4.9.3
-- bcrypt: ^5.1.1
-- body-parser: ^1.20.2
-- cors: ^2.8.5
-- dotenv: ^16.3.1
-- express: ^4.18.2
-- graphql: ^16.8.0
-- jsonwebtoken: ^9.0.2
-- mongoose: ^7.5.1
-
+- @headlessui/react: ^2.2.0
+- @heroicons/react: ^2.2.0
+- axios: ^1.7.9
+- chart.js: ^4.4.7
+- depcheck: ^1.4.7
+- lucide-react: ^0.474.0
+- react: ^18.3.1
+- react-chartjs-2: ^5.3.0
+- react-dom: ^18.3.1
+- recharts: ^2.15.0
 
 ## License
 
