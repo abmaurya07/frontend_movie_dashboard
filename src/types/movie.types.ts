@@ -10,6 +10,7 @@ export interface Movie {
 export interface MovieStats {
   total_movies: number;
   average_rating: number;
+  average_gross: number;
   year: number;
 }
 

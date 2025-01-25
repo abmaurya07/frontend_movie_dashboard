@@ -30,7 +30,7 @@ const TopRatedMoviesChart: FC<TopRatedMoviesChartProps> = ({ year }) => {
         </div>
         {/* Stats Section */}
         <div className="w-full sm:w-auto">
-          <MovieStats startYear={year} />
+          <MovieStats startYear={year} type='rating'/>
         </div>
       </div>
       <MovieChart 

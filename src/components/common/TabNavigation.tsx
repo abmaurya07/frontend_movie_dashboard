@@ -33,15 +33,6 @@ const TabNavigation: React.FC<TabNavigationProps> = ({
       ),
     },
     {
-      id: 'votes' as ChartType,
-      label: 'Most Voted (All Time)',
-      icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
-        </svg>
-      ),
-    },
-    {
       id: 'gross' as ChartType,
       label: `Top Grossing (${selectedYear})`,
       icon: (
@@ -50,10 +41,20 @@ const TabNavigation: React.FC<TabNavigationProps> = ({
         </svg>
       ),
     },
+    {
+      id: 'votes' as ChartType,
+      label: 'Most Voted (All Time)',
+      icon: (
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
+        </svg>
+      ),
+    },
+    
   ];
 
   return (
-    <div className="mb-6 sm:mb-8 sticky top-0 bg-gradient-to-br from-blue-50 to-indigo-100 py-4 z-20 after:content-[''] after:block after:h-1 after:invisible">
+    <div className="sm:mb-6 sticky top-0 bg-gradient-to-br from-blue-50 to-indigo-100 py-4 z-20 after:content-[''] after:block after:h-1 after:invisible">
       <div className="border-b border-gray-200">
         <div className="px-4 sm:px-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
           <nav className="flex overflow-x-auto hide-scrollbar">
@@ -63,7 +64,7 @@ const TabNavigation: React.FC<TabNavigationProps> = ({
                   key={tab.id}
                   onClick={() => onTabChange(tab.id)}
                   className={`${
-                    activeTab === tab.id
+                    activeTab !== tab.id
                       ? 'bg-white border-indigo-500 text-indigo-600 shadow-sm'
                       : 'border-transparent text-gray-300 hover:text-gray-400 hover:border-gray-300'
                   } flex items-center px-4 py-2 border-b-2 font-medium text-sm transition-all duration-200 flex-shrink-0 focus:outline-none`}
