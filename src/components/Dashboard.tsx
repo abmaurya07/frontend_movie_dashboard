@@ -31,16 +31,15 @@ const Dashboard: FC = () => {
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="w-full p-3 sm:p-6">
-        <Header 
-          selectedYear={selectedYear}
-          onYearChange={handleYearChange}
-          years={years}
-        />
+        <Header />
 
         <main className="w-full mx-auto">
           <TabNavigation 
             activeTab={activeTab}
             onTabChange={handleTabChange}
+            selectedYear={selectedYear}
+            onYearChange={handleYearChange}
+            years={years}
           />
 
           <ChartContainer 
