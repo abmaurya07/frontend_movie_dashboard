@@ -19,13 +19,17 @@ A modern React-based dashboard application for visualizing movie statistics and 
 - Chart.js for data visualization
 - TailwindCSS for styling
 - Vite as build tool
+- Docker for containerization
 
 ## Prerequisites
 
 - Node.js (v14 or higher)
 - npm or yarn package manager
+- Docker (for containerized deployment)
 
 ## Installation
+
+### Local Development
 
 1. Clone the repository:
 ```bash
@@ -49,6 +53,20 @@ VITE_CHART_TOP_GROSS_LIMIT=5
 VITE_CHART_ANIMATION_DURATION=1000
 VITE_CHART_ANIMATION_EASING=easeInOutQuart
 ```
+
+### Docker Deployment
+
+1. Build the Docker image:
+```bash
+docker build -t movie-dashboard .
+```
+
+2. Run the container:
+```bash
+docker run -p 3000:80 movie-dashboard
+```
+
+The application will be available at `http://localhost:3000`
 
 ## Running the Application
 
