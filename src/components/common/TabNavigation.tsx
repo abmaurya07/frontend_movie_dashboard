@@ -66,7 +66,7 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, onTabChange })
                 className={`${
                   activeTab === tab.id
                     ? 'bg-white border-indigo-500 text-indigo-600 shadow-sm'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    : 'border-transparent text-gray-300 hover:text-gray-400 hover:border-gray-300'
                 } flex items-center px-4 py-2 border-b-2 font-medium text-sm transition-all duration-200 flex-shrink-0 focus:outline-none`}
               >
                 <span className="flex items-center space-x-2">

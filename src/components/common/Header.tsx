@@ -20,7 +20,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ selectedYear, onYearChange, years }) => {
   return (
     <header className="w-full bg-white shadow-lg rounded-xl mb-6 sm:mb-8 sm:top-4 z-10">
-      <div className="container mx-auto py-4 sm:py-6 px-4 sm:px-8">
+      <div className="mx-auto py-4 sm:py-6 px-4 sm:px-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
           <div className="flex-1">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
