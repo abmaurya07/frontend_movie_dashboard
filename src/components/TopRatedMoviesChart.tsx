@@ -1,22 +1,25 @@
 import React, { FC } from 'react';
 import MovieChart from './common/MovieChart';
 import MovieStats from './common/MovieStats';
-import useMovieData from '../hooks/useMovieData';
+import { ChartData } from '../types/movie.types';
 
 interface TopRatedMoviesChartProps {
   year: number;
+  data: ChartData | null;
+  isLoading: boolean;
+  error: string | null;
 }
 
 /**
  * Component to display top rated movies chart
  * Shows bar chart of top 10 movies by rating
  */
-const TopRatedMoviesChart: FC<TopRatedMoviesChartProps> = ({ year }) => {
-  const { data, isLoading, error } = useMovieData({ 
-    type: 'rating',
-    year 
-  });
-
+const TopRatedMoviesChart: FC<TopRatedMoviesChartProps> = ({ 
+  year,
+  data,
+  isLoading,
+  error
+}) => {
   return (
     <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
@@ -35,7 +38,7 @@ const TopRatedMoviesChart: FC<TopRatedMoviesChartProps> = ({ year }) => {
       </div>
       <MovieChart 
         type="rating"
-        data={data}
+        data={data || { labels: [], datasets: [] }}
         year={year}
         isLoading={isLoading}
         error={error}

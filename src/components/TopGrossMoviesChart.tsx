@@ -1,22 +1,25 @@
 import React, { FC } from 'react';
 import MovieChart from './common/MovieChart';
 import MovieStats from './common/MovieStats';
-import useMovieData from '../hooks/useMovieData';
+import { ChartData } from '../types/movie.types';
 
 interface TopGrossMoviesChartProps {
   year: number;
+  data: ChartData | null;
+  isLoading: boolean;
+  error: string | null;
 }
 
 /**
  * Component to display top grossing movies chart
  * Shows bar chart of top 5 movies by gross revenue
  */
-const TopGrossMoviesChart: FC<TopGrossMoviesChartProps> = ({ year }) => {
-  const { data, isLoading, error } = useMovieData({ 
-    type: 'gross',
-    year 
-  });
-
+const TopGrossMoviesChart: FC<TopGrossMoviesChartProps> = ({ 
+  year,
+  data,
+  isLoading,
+  error
+}) => {
   return (
     <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
       <div className='flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4'>
@@ -35,7 +38,7 @@ const TopGrossMoviesChart: FC<TopGrossMoviesChartProps> = ({ year }) => {
       </div>
       <MovieChart 
         type="gross"
-        data={data}
+        data={data || { labels: [], datasets: [] }}
         year={year}
         isLoading={isLoading}
         error={error}

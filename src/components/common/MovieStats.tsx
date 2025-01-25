@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { MovieStats as MovieStatsType } from '../../types/movie.types';
-import movieService from '../../services/movieService';
 import { UI_CONFIG } from '../../config/constants';
+import { useMovieStats } from '../../context/MovieStatsContext';
 
 interface MovieStatsProps {
   startYear: number;
@@ -15,15 +15,13 @@ interface MovieStatsProps {
  */
 const MovieStats: FC<MovieStatsProps> = ({ startYear, endYear, type = 'rating' }) => {
   const [stats, setStats] = useState<MovieStatsType | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const { getStats, isLoading, error: contextError } = useMovieStats();
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchStats = async () => {
-      setIsLoading(true);
-      setError(null);
       try {
-        const statsData = await movieService.getMovieStats(startYear, endYear);
+        const statsData = await getStats(startYear, endYear);
         const yearStats = statsData.find(stat => stat.year === startYear) || {
           total_movies: 0,
           average_rating: 0,
@@ -32,16 +30,14 @@ const MovieStats: FC<MovieStatsProps> = ({ startYear, endYear, type = 'rating' }
         };
         
         setStats(yearStats);
-      } catch (error) {
-        setError('Failed to fetch stats. Please try again later.');
-        console.error('Error fetching stats:', error);
-      } finally {
-        setIsLoading(false);
+        setError(null);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch stats');
       }
     };
 
     fetchStats();
-  }, [startYear, endYear]);
+  }, [startYear, endYear, getStats]);
 
   if (isLoading) {
     return (
@@ -56,13 +52,13 @@ const MovieStats: FC<MovieStatsProps> = ({ startYear, endYear, type = 'rating' }
     );
   }
 
-  if (error) {
+  if (error || contextError) {
     return (
       <div className={`text-center p-3 sm:p-4 ${UI_CONFIG.COLORS.ERROR.DEFAULT}`}>
         <svg className="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 sm:mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <p className={`${UI_CONFIG.FONTS.SIZES.SM} sm:${UI_CONFIG.FONTS.SIZES.BASE}`}>{error}</p>
+        <p className={`${UI_CONFIG.FONTS.SIZES.SM} sm:${UI_CONFIG.FONTS.SIZES.BASE}`}>{error || contextError}</p>
       </div>
     );
   }

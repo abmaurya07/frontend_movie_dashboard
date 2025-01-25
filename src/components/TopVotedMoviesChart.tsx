@@ -1,16 +1,22 @@
 import React, { FC } from 'react';
 import MovieChart from './common/MovieChart';
-import useMovieData from '../hooks/useMovieData';
+import { ChartData } from '../types/movie.types';
+
+interface TopVotedMoviesChartProps {
+  data: ChartData | null;
+  isLoading: boolean;
+  error: string | null;
+}
 
 /**
  * Component to display top voted movies chart
  * Shows line chart of top 5 movies by number of votes
  */
-const TopVotedMoviesChart: FC = () => {
-  const { data, isLoading, error } = useMovieData({ 
-    type: 'votes'
-  });
-
+const TopVotedMoviesChart: FC<TopVotedMoviesChartProps> = ({ 
+  data,
+  isLoading,
+  error
+}) => {
   return (
     <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
       <div className="flex flex-col">
@@ -23,7 +29,7 @@ const TopVotedMoviesChart: FC = () => {
       </div>
       <MovieChart 
         type="votes"
-        data={data}
+        data={data || { labels: [], datasets: [] }}
         isLoading={isLoading}
         error={error}
       />

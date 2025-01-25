@@ -13,7 +13,7 @@
  * @param {number} selectedYear - Selected year for filtering chart data
  */
 import React from 'react';
-import { ChartType } from '../../types/movie.types';
+import { ChartType, ChartData } from '../../types/movie.types';
 import TopRatedMoviesChart from '../TopRatedMoviesChart';
 import TopVotedMoviesChart from '../TopVotedMoviesChart';
 import TopGrossMoviesChart from '../TopGrossMoviesChart';
@@ -21,17 +21,49 @@ import TopGrossMoviesChart from '../TopGrossMoviesChart';
 interface ChartContainerProps {
   activeTab: ChartType;
   selectedYear: number;
+  chartData: ChartData | null;
+  isLoading: boolean;
+  error: string | null;
 }
 
-const ChartContainer: React.FC<ChartContainerProps> = ({ activeTab, selectedYear }) => {
+const ChartContainer: React.FC<ChartContainerProps> = ({ 
+  activeTab, 
+  selectedYear,
+  chartData,
+  isLoading,
+  error
+}) => {
   const renderActiveChart = () => {
     switch (activeTab) {
       case 'rating':
-        return <TopRatedMoviesChart key={`rating-${selectedYear}`} year={selectedYear} />;
+        return (
+          <TopRatedMoviesChart 
+            key={`rating-${selectedYear}`} 
+            year={selectedYear}
+            data={chartData}
+            isLoading={isLoading}
+            error={error}
+          />
+        );
       case 'votes':
-        return <TopVotedMoviesChart key="votes" />;
+        return (
+          <TopVotedMoviesChart 
+            key="votes"
+            data={chartData}
+            isLoading={isLoading}
+            error={error}
+          />
+        );
       case 'gross':
-        return <TopGrossMoviesChart key={`gross-${selectedYear}`} year={selectedYear} />;
+        return (
+          <TopGrossMoviesChart 
+            key={`gross-${selectedYear}`} 
+            year={selectedYear}
+            data={chartData}
+            isLoading={isLoading}
+            error={error}
+          />
+        );
       default:
         return null;
     }
